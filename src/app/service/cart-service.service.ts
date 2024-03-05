@@ -16,7 +16,7 @@ export class CartServiceService {
     return this.cart;
   }
 
-  public getCartbyId(id: string): IArticlePanier|undefined {
+  public getCartbyId(id: string): IArticlePanier | undefined {
     return this.cart.find(x => x.id === id);
   }
 

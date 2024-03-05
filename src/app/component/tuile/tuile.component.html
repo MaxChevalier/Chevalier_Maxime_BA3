@@ -9,11 +9,12 @@
 
         <div *ngIf="isInCart">
             <span>Quantité :</span>
-            <button (click)="onUpdateQuantity(-1)" [disabled]="cartArcticle != undefined && cartArcticle.quantity<=1">◀</button>
+            <button (click)="onUpdateQuantity(-1)"
+                [disabled]="cartArcticle != undefined && cartArcticle.quantity<=1">◀</button>
             <span>{{cartArcticle?.quantity}}</span>
             <button (click)="onUpdateQuantity(1)">▶</button>
         </div>
-        <button  *ngIf="(isInCart == false) && (article.Buy != 'NFS')" (click)="addToCart()">Ajouter au panier</button>
-        <button  *ngIf="isInCart" (click)="removeFromCart()">Retirer du panier</button>
+        <button *ngIf="(isInCart == false) && (article.Buy != 'NFS')" (click)="addToCart()">Ajouter au panier</button>
+        <button *ngIf="isInCart" (click)="removeFromCart()">Retirer du panier</button>
     </div>
 </div>

@@ -4,8 +4,8 @@ import { CartServiceService } from '../../service/cart-service.service';
 import { Router } from '@angular/router';
 import { EcommerceServiceService } from '../../service/ecommerce-service.service';
 import { SubscriberController } from '../../component/commun/subscriberController';
-import { take } from 'rxjs';
 import { IUser } from '../../Interface/IUser';
+import { valideDateValidator } from '../../Validator/validDate.validator';
 
 @Component({
 	selector: 'app-checkout',
@@ -17,6 +17,7 @@ import { IUser } from '../../Interface/IUser';
 export class CheckoutComponent extends SubscriberController {
 
 	public form!: FormGroup;
+	public formError: string | undefined = undefined;
 
 	constructor(private cartServiceService: CartServiceService, private router: Router, private EcommerceService: EcommerceServiceService) {
 		super();
@@ -77,7 +78,8 @@ export class CheckoutComponent extends SubscriberController {
 				[
 					Validators.required,
 					Validators.minLength(5),
-					Validators.maxLength(5)
+					Validators.maxLength(5),
+					valideDateValidator()
 				]
 			),
 		});
@@ -88,14 +90,16 @@ export class CheckoutComponent extends SubscriberController {
 			this.EcommerceService.purchaseArticle({ panier: this.cartServiceService.getCart(), user: this.form.value as IUser }).subscribe({
 				next: (res) => {
 					alert('Commande validée');
-					this.cartServiceService.clearCart();
-					this.router.navigate(['/']);
+					// this.cartServiceService.clearCart();
+					// this.router.navigate(['/']);
 				},
 				error: (error) => {
 					console.error('Erreur lors de la requête POST:', error);
 					alert('Erreur lors de la commande\nVeuillez réessayer ultérieurement');
 				}
 			});
+		} else {
+			this.formError = this.form.errors?.toString() || 'Erreur dans le formulaire';
 		}
 	}
 

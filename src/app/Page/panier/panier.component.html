@@ -1,4 +1,7 @@
-<app-panier-item *ngFor="let article of Cart" [article]="article" (removeFromCartOutput)="removeArticle($event)" (updateQuantityOutput)="updateTotalPrice()"/>
+<div class="cart-container">
+    <app-panier-item *ngFor="let article of Cart" [article]="article" (removeFromCartOutput)="removeArticle($event)"
+        (updateQuantityOutput)="updateTotalPrice()" />
+</div>
 <p>Total : {{totalPrice}}</p>
 <button (click)="onValidate()">Valider le panier</button>
 <button (click)="onEmptyCart()">Vider le panier</button>

@@ -10,8 +10,8 @@ describe('TuileComponent', () => {
     await TestBed.configureTestingModule({
       imports: [TuileComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(TuileComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

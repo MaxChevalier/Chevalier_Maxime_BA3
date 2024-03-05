@@ -25,7 +25,7 @@ export class PanierItemComponent {
   onUpdateQuantity(nb: number) {
     this.article.quantity += nb;
     this.article.totalPrice = this.article.price * this.article.quantity;
-		this.cartServiceService.addArticleToCart(this.article as IArticlePanier);
+    this.cartServiceService.addArticleToCart(this.article as IArticlePanier);
     this.updateQuantityOutput.emit();
   }
 

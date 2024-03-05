@@ -33,7 +33,7 @@ export class TuileComponent {
 					name: this.article.Name,
 					price: +this.article.Buy as number,
 					quantity: 1,
-					totalPrice: 0
+					totalPrice: +this.article.Buy as number
 				}
 			}
 		}
