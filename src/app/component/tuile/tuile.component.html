@@ -1,0 +1,19 @@
+<div class="tuile">
+    <div>
+        <img [src]="article['Closet Image']" alt="Image de l'article">
+    </div>
+    <div>
+        <h3>{{article.Name}}</h3>
+        <p>Seasonal : {{article["Seasonal Availability"]}}</p>
+        <p>Price : {{article.Buy}}</p>
+
+        <div *ngIf="isInCart">
+            <span>Quantité :</span>
+            <button (click)="onUpdateQuantity(-1)" [disabled]="quantity<=1">◀</button>
+            <span>{{quantity}}</span>
+            <button (click)="onUpdateQuantity(1)">▶</button>
+        </div>
+        <button  *ngIf="(isInCart == false) && (article.Buy != 'NFS')" (click)="addToCart()">Ajouter au panier</button>
+        <button  *ngIf="isInCart" (click)="removeFromCart()">Retirer du panier</button>
+    </div>
+</div>

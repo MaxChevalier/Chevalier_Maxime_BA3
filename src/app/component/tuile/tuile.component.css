@@ -1,8 +1,10 @@
-.tuile-list{
+.tuile{
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     padding: 10px;
+    border: 1px solid #ccc;
+    height: 200px;
+    width: 450px;
 }

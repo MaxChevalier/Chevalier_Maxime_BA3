@@ -1,12 +1,35 @@
 import { Component } from '@angular/core';
+import { TuileComponent } from '../../component/tuile/tuile.component';
+import { NgFor } from '@angular/common';
+import { SubscriberController } from '../../component/commun/subscriberController';
+import { EcommerceServiceService } from '../../service/ecommerce-service.service';
+import { IArticle } from '../../Interface/IArcticle';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [],
+  imports: [TuileComponent, NgFor],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent {
+export class HomeComponent extends SubscriberController{
 
+  public articles: IArticle[] = [];
+
+  constructor(private EcommerceService: EcommerceServiceService) {
+    super();
+  }
+
+  ngOnInit() {
+		this.subscription["$GetArticle"] = this.EcommerceService.getAllArticle().subscribe(
+			{
+				next: (res) => {
+					this.articles = res
+				},
+				error: (err) => {
+					console.error(err)
+				}
+			}
+		)
+	}
 }
