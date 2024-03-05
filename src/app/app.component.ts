@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './component/app/header/header.component';
 import { NavComponent } from './component/app/nav/nav.component';
 import { FooterComponent } from './component/app/footer/footer.component';
+import { IArticlePanier } from './Interface/IArticlePanier';
 
 @Component({
   selector: 'app-root',
@@ -13,4 +14,8 @@ import { FooterComponent } from './component/app/footer/footer.component';
 })
 export class AppComponent {
   title = 'Chevalier_Maxime_BA3';
+
+  ngOnInit() {
+    
+  }
 }

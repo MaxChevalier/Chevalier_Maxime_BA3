@@ -1,34 +1,58 @@
 import { Component, Input } from '@angular/core';
 import { IArticle } from '../../Interface/IArcticle';
 import { NgIf } from '@angular/common';
+import { CartServiceService } from '../../service/cart-service.service';
+import { IArticlePanier } from '../../Interface/IArticlePanier';
 
 
 @Component({
-  selector: 'app-tuile',
-  standalone: true,
-  imports: [NgIf],
-  templateUrl: './tuile.component.html',
-  styleUrl: './tuile.component.css'
+	selector: 'app-tuile',
+	standalone: true,
+	imports: [NgIf],
+	templateUrl: './tuile.component.html',
+	styleUrl: './tuile.component.css'
 })
 export class TuileComponent {
 
-  @Input() article!: IArticle;
+	@Input() article!: IArticle;
+	@Input() cartArcticle!: IArticlePanier | undefined;
 
-  quantity: number = 1;
-  isInCart: boolean = false;
+	isInCart: boolean = false;
 
-  constructor() { }
+	constructor(private cartServiceService: CartServiceService) { }
 
-  addToCart() {
-    if (this.article.Buy == 'NFS') return;
-    this.isInCart = true;
-  }
-  removeFromCart() {
-    this.isInCart = false;
-  }
+	ngOnInit() {
+		this.cartArcticle = this.cartServiceService.getCartbyId(this.article["Unique Entry ID"]);
+		if (this.cartArcticle) {
+			this.isInCart = true;
+		} else {
+			this.isInCart = false;
+			if (this.article.Buy != 'NFS') {
+				this.cartArcticle = {
+					id: this.article["Unique Entry ID"],
+					name: this.article.Name,
+					price: +this.article.Buy as number,
+					quantity: 1,
+					totalPrice: 0
+				}
+			}
+		}
+	}
 
-  onUpdateQuantity(nb: number) {
-    this.quantity += nb;
-  }
-  
+	addToCart() {
+		if (this.article.Buy == 'NFS') return;
+		this.isInCart = true;
+		this.cartServiceService.addArticleToCart(this.cartArcticle as IArticlePanier);
+	}
+	removeFromCart() {
+		this.isInCart = false;
+	}
+
+	onUpdateQuantity(nb: number) {
+		if (this.cartArcticle) {
+			this.cartArcticle.quantity += nb;
+			this.addToCart();
+		}
+	}
+
 }

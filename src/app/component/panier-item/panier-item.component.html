@@ -1,0 +1,12 @@
+<div>
+    <h3>{{article.name}}</h3>
+    <p>Price : {{article.price}}</p>
+    <div>
+        <span>Quantité :</span>
+        <button (click)="onUpdateQuantity(-1)" [disabled]="article.quantity<=1">◀</button>
+        <span>{{article.quantity}}</span>
+        <button (click)="onUpdateQuantity(1)">▶</button>
+    </div>
+    <p>Total price : {{article.totalPrice}}</p>
+    <button  (click)="removeFromCart()">Retirer du panier</button>
+</div>
