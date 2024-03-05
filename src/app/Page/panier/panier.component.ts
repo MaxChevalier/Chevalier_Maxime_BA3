@@ -15,16 +15,26 @@ import { Router } from '@angular/router';
 export class PanierComponent {
 
   public Cart: IArticlePanier[] = [];
+  public totalPrice: number = 0;
 
   constructor(private cartServiceService: CartServiceService, private router: Router) { }
 
   ngOnInit() {
     this.Cart = this.cartServiceService.getCart();
+    this.updateTotalPrice();
+  }
+
+  updateTotalPrice() {
+    this.totalPrice = 0;
+    this.Cart.forEach(element => {
+      this.totalPrice += element.totalPrice;
+    });
   }
 
   removeArticle(article: IArticlePanier) {
     this.cartServiceService.removeArticleFromCart(article.id);
     this.Cart = this.cartServiceService.getCart();
+    this.updateTotalPrice();
   }
 
   onValidate() {
@@ -35,7 +45,10 @@ export class PanierComponent {
     if (confirm("Voulez-vous vraiment vider votre panier ?")) {
       this.cartServiceService.clearCart();
       this.Cart = this.cartServiceService.getCart();
+      this.updateTotalPrice();
     }
   }
+
+
 
 }

@@ -14,6 +14,7 @@ export class PanierItemComponent {
   @Input() article!: IArticlePanier;
 
   @Output() removeFromCartOutput = new EventEmitter<IArticlePanier>();
+  @Output() updateQuantityOutput = new EventEmitter<void>();
 
   constructor(private cartServiceService: CartServiceService) { }
 
@@ -25,6 +26,7 @@ export class PanierItemComponent {
     this.article.quantity += nb;
     this.article.totalPrice = this.article.price * this.article.quantity;
 		this.cartServiceService.addArticleToCart(this.article as IArticlePanier);
+    this.updateQuantityOutput.emit();
   }
 
 }

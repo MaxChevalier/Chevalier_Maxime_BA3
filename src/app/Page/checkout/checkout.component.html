@@ -1,1 +1,33 @@
-<p>checkout works!</p>
+<form [formGroup]="form">
+    <div>
+        <label for="lastname">LastName</label>
+        <input type="text" id="lastname" name="lastname" formControlName="lastname" required>
+    </div>
+    <div>
+        <label for="firstname">FirstName</label>
+        <input type="text" id="firstname" name="firstname" formControlName="firstname" required>
+    </div>
+    <div>
+        <label for="adress">Address</label>
+        <input type="text" id="adress" name="adress" formControlName="adress" required>
+    </div>
+    <div>
+        <label for="zipcode">PostalCode</label>
+        <input type="text" id="zipcode" name="zipcode" formControlName="zipcode" required maxlength="5">
+    </div>
+    <div>
+        <label for="city">City</label>
+        <input type="text" id="city" name="city" formControlName="city" required>
+    </div>
+    <div>
+        <label for="card">CardNumber</label>
+        <input type="text" id="card" name="card" formControlName="card" required maxlength="16">
+    </div>
+    <div>
+        <label for="cardDate">CardDate</label>
+        <input type="text" id="cardDate" name="cardDate" formControlName="cardDate" required>
+    </div>
+    <button (click)="onSubmit()">Submit</button>
+</form>
+
+<button (click)="onGiveUp()" >Abandonné la commande</button>
